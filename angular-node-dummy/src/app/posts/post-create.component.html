@@ -1,0 +1,55 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<form [formGroup]="form" *ngIf="!isLoading" (submit)="onAddPost()">
+  <mat-card>
+    <mat-form-field>
+      <mat-label>Enter title here</mat-label>
+      <input matInput type="text" formControlName="title" />
+      <mat-error *ngIf="form.controls.title.invalid">
+        <div *ngIf="form.controls.title.errors.required">
+          Plaese enter the title!
+        </div>
+      </mat-error>
+      <mat-error *ngIf="form.controls.title.invalid">
+        <div *ngIf="form.controls.title.errors.minlength">
+          Plaese enter at least 3 character!
+        </div>
+      </mat-error>
+    </mat-form-field>
+    <button type="button" mat-stroked-button (click)="filePicker.click()">
+      Pick Image
+    </button>
+    <input #filePicker type="file" (change)="onImagePicked($event)" />
+    <div
+      class="image-preview"
+      *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"
+    >
+      <img [src]="imagePreview" [alt]="form.value.title" />
+    </div>
+
+    <mat-form-field>
+      <mat-label>Content</mat-label>
+      <textarea matInput rows="3" formControlName="content"></textarea>
+      <mat-error *ngIf="form.controls.content.invalid">
+        <div *ngIf="form.controls.content.errors.required">
+          Plaese enter the content
+        </div>
+      </mat-error>
+    </mat-form-field>
+    <button
+      *ngIf="mode === 'create'"
+      type="submit"
+      mat-raised-button
+      color="accent"
+    >
+      Create Post
+    </button>
+    <button
+      *ngIf="mode === 'edit'"
+      type="submit"
+      mat-raised-button
+      color="primary"
+    >
+      Update Post
+    </button>
+  </mat-card>
+</form>

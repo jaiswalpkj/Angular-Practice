@@ -1,0 +1,6 @@
+{
+  "env": {
+    "MONGO_ATLAS_PW": "6YUUPFRPWF43T4bx",
+    "JWT_KEY": "Sceret_Private_Key_Should_be_Longer"
+  }
+}
